@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+本專案環境是透過 [Create React App](https://github.com/facebook/create-react-app) 所建立。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# The Good Weather
+這是一個觀測全台各縣市即時天氣的部件，主要使用 React 與 Redux 作為開發工具。如有興趣，可至 https://yuentung.github.io/weather/ 查看線上版本。
 
-## Available Scripts
+<div>
+    <img src="./assets/dark.png" alt="dark" width="48%"/>
+    <img src="./assets/light.png" alt="light" width="48%"/>
+</div>
 
-In the project directory, you can run:
+## 啟動專案
+```shell
+$ git clone https://github.com/yuentung/weather.git
+$ cd weather
+$ npm install && npm start (或使用 yarn && yarn start)
+```
 
-### `yarn start`
+## 專案架構
+以下主要針對 src 資料夾做介紹：
+```
+src
+├── components
+│   └── Parameter.js
+│   └── WeatherIcon.js
+│   └── WeatherSetting.js
+│   └── WeatherCard.js
+│   └── App.js
+├── constants
+│   └── sunrise-sunset.json
+│   └── index.js
+├── images
+├── hooks
+├── apis
+├── history.js
+├── styles.css
+└── index.js
+```
+依照不同功能及需求創建資料夾與檔案：
+- `/components`：放置所有元件
+- `/constants`：放置所有 `不會更改` 的資訊，包含：
+    - `sunrise-sunset.js`：存放各地區日出、日落時間資訊
+    - `index.js`：存放各地區名稱
+- `/images`：放置所有圖片
+- `/hooks`：放置 custom hooks
+- `/apis`：放置所有 API
+- `history.js`：放置 history 物件
+- `styles.css`：設定全域 CSS
+- `index.js`：為本專案的 entry point
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 使用工具
+- [React](https://reactjs.org/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    除了運用 React 中兩大主要概念——元件(component)與狀態(state)建構專案外，同時嘗試使用各個 Hooks。
 
-### `yarn test`
+- [React Router](https://reactrouter.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    使用 React Router 建立路由，分別切換顯示 `WeatherCard(天氣資訊)` 與 `WeatherSetting(選擇地區)` 兩元件，以此達成於 SPA 中進行頁面切換的效果。
 
-### `yarn build`
+- [Emotion](https://emotion.sh/docs/introduction)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    透過 Emotion 以 CSS-in-JS 的方式建立附帶樣式的 React 元件，除了能夠以熟悉的撰寫方式設定 CSS 取代 Inline Style 中 style 物件的寫法外，還可以透過 props 對各元件進行客製化的設定。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Axios](https://axios-http.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    藉由 Axios 發送請求，以取得中央氣象局中各地區的即時天氣資訊。
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 未來發展
+- [ ] 持續擴增功能，如提供更多即時天氣資訊等
