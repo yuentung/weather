@@ -8,6 +8,7 @@ import { ReactComponent as RainIcon } from '../images/rain.svg';
 import { ReactComponent as CogIcon } from '../images/cog.svg';
 import { ReactComponent as RefreshIcon } from '../images/refresh.svg';
 import { ReactComponent as LoadingIcon } from '../images/loading.svg';
+import history from '../history';
 
 const Wrapper = styled.div`
     position: relative;
@@ -174,7 +175,7 @@ const Loading = styled(LoadingIcon)`
     }
 `;
 
-const WeatherCard = ({ cityName, weatherElement, moment, fetchWeather, setCurrentPage }) => {
+const WeatherCard = ({ cityName, weatherElement, moment, fetchWeather }) => {
     const {
         observationTime,
         description,
@@ -220,7 +221,7 @@ const WeatherCard = ({ cityName, weatherElement, moment, fetchWeather, setCurren
                 />
             </ParameterWrapper>
             <ObservationTime>最後觀測時間：{observationTime}</ObservationTime>
-            <Cog onClick={() => setCurrentPage('WeatherSetting')} />
+            <Cog onClick={() => history.push(`${process.env.PUBLIC_URL}/setting`)} />
             <Refresh onClick={fetchWeather} />
             {isLoading && (
                 <LoadingWrapper>

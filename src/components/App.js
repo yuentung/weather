@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Router, Route } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ThemeProvider } from '@emotion/react';
 import moment from 'moment';
@@ -7,6 +8,7 @@ import { locationList } from '../constants';
 import sunriseAndSunsetData from '../constants/sunrise-sunset.json';
 import WeatherSetting from './WeatherSetting';
 import WeatherCard from './WeatherCard';
+import history from '../history';
 
 const theme = {
     light: {
@@ -60,8 +62,6 @@ const getMoment = locationName => {
 const App = () => {
     const [currentTheme, setCurrentTheme] = useState('light');
 
-    const [currentPage, setCurrentPage] = useState('WeatherCard');
-
     const [currentCity, setCurrentCity] = useState(localStorage.getItem('city') || '南投縣');
     const currentLocation = findLocation(currentCity) || {};
 
@@ -82,18 +82,30 @@ const App = () => {
     return (
         <ThemeProvider theme={theme[currentTheme]}>
             <Container>
-                {currentPage === 'WeatherCard' && <WeatherCard
-                    cityName={currentLocation.cityName}
-                    weatherElement={weatherElement}
-                    moment={moment}
-                    fetchWeather={fetchWeather}
-                    setCurrentPage={setCurrentPage}
-                />}
-                {currentPage === 'WeatherSetting' && <WeatherSetting
-                    cityName={currentLocation.cityName}
-                    setCurrentCity={setCurrentCity}
-                    setCurrentPage={setCurrentPage}
-                />}
+                <Router history={history}>
+                    <Route
+                        exact
+                        path={`${process.env.PUBLIC_URL}/`}
+                        component={() => (
+                            <WeatherCard
+                                cityName={currentLocation.cityName}
+                                weatherElement={weatherElement}
+                                moment={moment}
+                                fetchWeather={fetchWeather}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path={`${process.env.PUBLIC_URL}/setting`}
+                        component={() => (
+                            <WeatherSetting
+                                cityName={currentLocation.cityName}
+                                setCurrentCity={setCurrentCity}
+                            />
+                        )}
+                    />
+                </Router>
             </Container>
         </ThemeProvider>
     );

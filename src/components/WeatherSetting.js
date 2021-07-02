@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { locationList } from '../constants';
+import history from '../history';
 
 const Wrapper = styled.div`
     position: relative;
@@ -92,7 +93,7 @@ const SaveButton = styled.button`
 
 const cityList = locationList.map(({ cityName }) => cityName);
 
-const WeatherSetting = ({ cityName, setCurrentCity, setCurrentPage }) => {
+const WeatherSetting = ({ cityName, setCurrentCity }) => {
     const [locationName, setLocationName] = useState(cityName);
 
     const handleChange = e => {
@@ -102,7 +103,7 @@ const WeatherSetting = ({ cityName, setCurrentCity, setCurrentPage }) => {
     const handleSave = () => {
         if (cityList.includes(locationName)) {
             setCurrentCity(locationName);
-            setCurrentPage('WeatherCard');
+            history.push(`${process.env.PUBLIC_URL}/`);
         } else {
             alert('Location not found.');
         }
@@ -125,7 +126,7 @@ const WeatherSetting = ({ cityName, setCurrentCity, setCurrentPage }) => {
                 ))}
             </datalist>
             <ButtonGroup>
-                <BackButton onClick={() => setCurrentPage('WeatherCard')}>返回</BackButton>
+                <BackButton onClick={() => history.push(`${process.env.PUBLIC_URL}/`)}>返回</BackButton>
                 <SaveButton onClick={handleSave}>儲存</SaveButton>
             </ButtonGroup>
         </Wrapper>
