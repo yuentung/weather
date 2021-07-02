@@ -31,8 +31,7 @@ const Label = styled.label`
     color: ${({ theme }) => theme.textColor};
 `;
 
-const Input = styled.input`
-    display: block;
+const Select = styled.select`
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -113,18 +112,16 @@ const WeatherSetting = ({ cityName, setCurrentCity }) => {
         <Wrapper>
             <Title>設定</Title>
             <Label htmlFor="location">地區</Label>
-            <Input
-                list="location-list"
+            <Select
                 id="location"
                 name="location"
                 onChange={handleChange}
                 value={locationName}
-            />
-            <datalist id="location-list">
-                {cityList.map((cityName) => (
-                    <option key={cityName} value={cityName} />
+            >
+                {cityList.map(cityName => (
+                    <option key={cityName} value={cityName}>{cityName}</option>
                 ))}
-            </datalist>
+            </Select>
             <ButtonGroup>
                 <BackButton onClick={() => history.push(`${process.env.PUBLIC_URL}/`)}>返回</BackButton>
                 <SaveButton onClick={handleSave}>儲存</SaveButton>
